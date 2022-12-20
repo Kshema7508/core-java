@@ -1,0 +1,3 @@
+class Redbull extends EnergyDrink{
+
+}

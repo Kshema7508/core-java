@@ -1,0 +1,3 @@
+class GoodDay extends Biscuits{
+
+}

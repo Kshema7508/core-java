@@ -1,0 +1,3 @@
+class Fasttrack extends Watch{
+
+}
