@@ -1,0 +1,102 @@
+1)   1. public static void main(String args[]):  It is a main method in java. It is use to call the code in runtime. public static  is a type of acces-modifier. voidis a return type. main is a method in java.
+
+      2. class: It is a template or blueprint which consist of states and behaviour.  States are variables in class.  Behaviour are method in class.
+          Object: Object is an instace of a class. It exists in a real time.
+
+      3. JVM: JVM loads the bytecode, verifies the byte code and execute the byte code. Main purpose of JVM is  to provide runtime environment.
+          JRE: JRE is a combination of JVM and set of libraries.  JRE=JVM+set of libraries. It is platform independent.
+          JDK: JDK is a combinatio of JRE and java development tools(compiler, debugger). JDK=JRE+development tools.
+
+2) public class ReverseNo {
+	public static void main(String[] args) {
+		
+		int num[]= {1,2,3,4};
+		
+			for(int i=num.length;i>0;i--) {
+				System.out.print(i);
+				
+			}
+	}
+}
+
+3)class ReverseString{
+
+	public static void main(String a[]){
+		
+		String name="program";
+		char ch[]=name.toCharArray();
+		for(int i=ch.length-1;i>=0;i--){
+			System.out.print(ch[i]);
+		}
+		System.out.println( );
+	}
+}
+
+4) Constructor: Construcor is a special type of method. Which has same name as class name without any returntype.
+types of constructor: 1> Default constructor: Default constructor is without any parameter. 
+			syntax: ClassName referencevariable=new Classname(); 
+			eg: Hospital hospital=new Hospital();
+		2> Paramiter constructor:the constructor having some parameter.
+			syntacx: ClassName referencevariable=new Classname(parameter); 
+			eg: Hospital hospital=new Hospital(patient);
+
+5) this keyword: this keyword is used to invoke a   intance of variable.
+eg:  public int Id;
+        this.Id=Id;
+
+7) Methods:Method is collection of statement or block of code. It is used to perfoem certain functionality.
+Types of methods: 1. Pre-defined method : The method which is already defined by the progrming language.It is also called Buit-in-method. eg: max(), sqrt().
+	               2. User-defined method: The method which is defined by the programmer or user is called user-defined method. eg: public static void multiply(int a){ ..}
+
+
+9) class loading: class loading convert the source code to byte code.
+Class loader: It is available in JVM. It loades the byte code in to JVM.
+
+10) No. Because it is a intance of class. we cannot make class as private.
+
+11)  class ArrayNo{
+
+	static int num[]={12,3,2,45,6,7,6};
+
+	public static void main(String a[]){
+
+	 	System.out.println(num.length);
+	 
+	}
+}
+
+12) No
+Because instance variables are accessed by object, but static variables are accessed by class. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
