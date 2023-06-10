@@ -1,20 +1,72 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
+     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="ref" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Home Page</title>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<style type="text/css">
+table{
+background-color: silver;
+text-align: center;
+}
+
+body{
+background-color: olive;
+}
+</style>
+
 </head>
 <body>
-<form action="registerLaptop" method="post">
-Company Name:<input type="text" name="companyName"> <br> 
-Model No:<input type="text" name="modelNo"> <br> 
-Color:<input type="text" name="color"> <br>
-Processor:<input type="text" name="processor"> <br>
-Ram:<input type="text" name="ram"> <br>
-Email:<input type="email" name="email"><br>
-<input type="submit" value="SUBMIT"> 
-</form>
+
+<div align="center">
+<h1>Welcome to our application</h1> 
+
+
+
+	<form action="searchByCompanyName" method="get">
+		<input type="text" name="companyName" placeholder="Enter the Company Name">
+		<button>Search</button>
+	</form>
+	
+	<a href="add.jsp" style="color: black;">Add Laptop</a>
+		
+	<table border="4">
+	<thead>
+		<tr>
+			
+			<th>Sl.No</th>
+			<th>Company Name</th>
+			<th>Model Number</th>
+			<th>Color</th>
+			<th>Processor</th>
+			<th>Ram</th>
+			<th>Action</th>
+		</tr>
+	</thead>
+	<tbody>
+	
+<ref:forEach items="${laptops}" var="laptop">
+<tr>
+	<td>${laptop.getId()}</td>
+	<td>${laptop.getCompanyName()}</td>
+	<td>${laptop.getModelNo()}</td>
+	<td>${laptop.getColor()}</td>
+	<td>${laptop.getProcessor()}</td>
+	<td>${laptop.getRam()}</td>
+	<td><a href="update/${laptop.getId()}" class="btn btn-success">Update</a>
+	&nbsp
+	<a href="delete/${laptop.getId()}" class="btn btn-primary">Delete</a></td>
+</tr>
+</ref:forEach>
+</tbody>
+</table>
+</div>
+
 </body>
 </html>

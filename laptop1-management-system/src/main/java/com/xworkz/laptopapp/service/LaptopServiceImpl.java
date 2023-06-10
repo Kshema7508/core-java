@@ -25,52 +25,52 @@ public class LaptopServiceImpl implements LaptopService{
 	@Autowired
 	private LaptopRepository repo;
 	
-	@Override
-	public boolean sendMail(String email) {
-		 
-		System.out.println("Inside sendMail");
-		
-		String portNumber="587";
-		String hostName="smtp.office365.com";
-		final String fromEmail="vijaykumarvini59@outlook.com";
-		final String password="Vij@y123";
-		String to=email;
-		
-		Properties prop=new Properties();
-		prop.put("mail.smtp.host", hostName);
-		prop.put("mail.smtp.port", portNumber);
-		prop.put("mail.smtp.starttls.enable", true);
-		prop.put("mail.debug",true);
-		prop.put("mail.smtp.auth", true);
-		prop.put("mail.transport.protocol", "smtp");
-		
-		Session session=Session.getInstance(prop, new Authenticator() {
-			@Override
-			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication(fromEmail, password);
-			}
-		});
-		
-		MimeMessage message=new MimeMessage(session);
-		
-		try {
-			message.setFrom(new InternetAddress(fromEmail));
-			message.setSubject("Registration completed");
-			message.setText("Thanks for registering!!!");
-			//here we need to add code
-			message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));
-			Transport.send(message);
-			
-		} catch (MessagingException e) {
-			e.printStackTrace();
-		}
-		
-		return true;
-	}  
+//	@Override
+//	public boolean sendMail(String email) {
+//		  
+//		System.out.println("Inside sendMail");
+//		
+//		String portNumber="587";
+//		String hostName="smtp.office365.com";
+//		final String fromEmail="vijaykumarvini59@outlook.com";
+//		final String password="Vij@y123";
+//		String to=email;
+//		
+//		Properties prop=new Properties();
+//		prop.put("mail.smtp.host", hostName);
+//		prop.put("mail.smtp.port", portNumber);
+//		prop.put("mail.smtp.starttls.enable", true);
+//		prop.put("mail.debug",true);
+//		prop.put("mail.smtp.auth", true);
+//		prop.put("mail.transport.protocol", "smtp");
+//		
+//		Session session=Session.getInstance(prop, new Authenticator() {
+//			@Override
+//			protected PasswordAuthentication getPasswordAuthentication() {
+//				return new PasswordAuthentication(fromEmail, password);
+//			}
+//		});
+//		
+//		MimeMessage message=new MimeMessage(session);
+//		
+//		try {
+//			message.setFrom(new InternetAddress(fromEmail));
+//			message.setSubject("Registration completed");
+//			message.setText("Thanks for registering!!!");
+//			//here we need to add code
+//			message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));
+//			Transport.send(message);
+//			
+//		} catch (MessagingException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		return true;
+//	}  
 
 	
 	@Override
-	public LaptopDTO validateAndSave(LaptopDTO dto) {
+	public void validateAndSave(LaptopDTO dto) {
 		
 		System.out.println("Inside validate and save");
 
@@ -113,11 +113,11 @@ public class LaptopServiceImpl implements LaptopService{
 		
 		}
 		
-		LaptopServiceImpl im=new LaptopServiceImpl();
-		im.sendMail(dto.getEmail()); 
+//		LaptopServiceImpl im=new LaptopServiceImpl();
+//		im.sendMail(dto.getEmail()); 
 		//repo.saveLaptop(dto);
 		
-		return dto;
+		return ;
 	}
 
 	@Override
@@ -157,6 +157,18 @@ public class LaptopServiceImpl implements LaptopService{
 		if(dto.getId()!=0 && dto.getCompanyName() !=null && dto.getModelNo()!=null && dto.getColor()!=null && dto.getProcessor()!=null && dto.getRam()!=null) {
 			repo.updateLaptopByIdRepo(dto);
 		}	
+	}
+
+
+	@Override
+	public LaptopDTO deleteLaptopByIdSer(int id) {
+		System.out.println("Inside deleteLaptopByIdSer");
+
+		if(id>0) {
+			
+			return repo.deleteLaptopByIdRepo(id);
+		}
+		return null;
 	}
 
 

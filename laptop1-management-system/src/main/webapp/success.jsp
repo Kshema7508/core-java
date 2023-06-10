@@ -53,8 +53,9 @@ td{
 <td>${laptop.getColor()}</td>
 <td>${laptop.getProcessor()}</td>
 <td>${laptop.getRam()}</td>
-<td><a href="update/${laptop.getId()}">Update</a></td>
-
+<td><a href="update/${laptop.getId()}">Update</a>
+&nbsp
+<a href="delete/${laptop.getId()}">Delete</a></td>
 </tr>
 </ref:forEach>
 </table>

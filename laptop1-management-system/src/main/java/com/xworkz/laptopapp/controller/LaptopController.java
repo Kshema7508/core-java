@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 import com.xworkz.laptopapp.dto.LaptopDTO;
@@ -26,7 +27,7 @@ public class LaptopController {
 	@Autowired
 	LaptopService service;
 	
-	//@RequestMapping(value="/registerLaptop", method=requestMethod.POST)
+	//@RequestMapping(value="/registerLaptop", method=requestMethod.POST) ---> method level mapping
 	
 	@PostMapping("/registerLaptop")
 	public String registerLaptop(@ModelAttribute LaptopDTO dto, HttpServletRequest req) {
@@ -35,7 +36,8 @@ public class LaptopController {
 		if(dto!=null) {
 			
 			
-			service.validateAndSave(dto);
+			service.validateAndSave(dto); //navigation logic
+			
 			req.setAttribute("name", dto.getCompanyName());
 			return "success";
 		}
@@ -52,7 +54,8 @@ public class LaptopController {
 		req.setAttribute("laptops", dtos);
 		
 		return "success";
-	} 
+	}
+	
 	
 	@GetMapping("/searchByCompanyName")
 	public String searchByCompanyName(@RequestParam("companyName") String companyName, HttpServletRequest req) {
@@ -90,5 +93,16 @@ public class LaptopController {
 		
 	}
 	
-	
+	@GetMapping(value = "/delete/{laptopId}")
+	public RedirectView deleteLaptop(@PathVariable("laptopId") int id, HttpServletRequest req) {
+		System.out.println("Inside deleteLaptop method");
+		
+		LaptopDTO dto=service.deleteLaptopByIdSer(id);
+		req.setAttribute("laptop", dto);
+	 	RedirectView view=new RedirectView();
+		view.setUrl(req.getContextPath()+"/listofLaptops");
+		
+		return view;
+	}
 }
+  

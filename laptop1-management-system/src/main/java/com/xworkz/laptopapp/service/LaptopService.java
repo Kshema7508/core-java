@@ -6,9 +6,9 @@ import com.xworkz.laptopapp.dto.LaptopDTO;
 
 public interface LaptopService {
 	
-	boolean sendMail(String email);
+	//boolean sendMail(String email);
 
-	LaptopDTO validateAndSave(LaptopDTO dto);
+	void validateAndSave(LaptopDTO dto);
 	
 	List<LaptopDTO> getAllLaptopsSer();
 	
@@ -17,5 +17,7 @@ public interface LaptopService {
 	List<LaptopDTO> getByCompanyNameSer(String companyName);
 
 	void updateLaptopByIdSer(LaptopDTO dto);
+
+	LaptopDTO deleteLaptopByIdSer(int id);
 	
 }

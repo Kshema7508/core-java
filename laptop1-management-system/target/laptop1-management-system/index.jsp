@@ -13,6 +13,7 @@ Model No:<input type="text" name="modelNo"> <br>
 Color:<input type="text" name="color"> <br>
 Processor:<input type="text" name="processor"> <br>
 Ram:<input type="text" name="ram"> <br>
+Email:<input type="email" name="email"><br>
 <input type="submit" value="SUBMIT"> 
 </form>
 </body>

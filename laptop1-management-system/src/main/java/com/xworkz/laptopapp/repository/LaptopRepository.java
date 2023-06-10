@@ -6,7 +6,7 @@ import com.xworkz.laptopapp.dto.LaptopDTO;
 
 public interface LaptopRepository {
 
-	LaptopDTO saveLaptop(LaptopDTO dto);
+	void saveLaptop(LaptopDTO dto);
 	
 	List<LaptopDTO> getAllLaptopRepo();
 	
@@ -15,4 +15,6 @@ public interface LaptopRepository {
 	LaptopDTO getAllLaptopByIdRepo(int id);
 
 	void updateLaptopByIdRepo(LaptopDTO dto);
+
+	LaptopDTO deleteLaptopByIdRepo(int id);
 }
