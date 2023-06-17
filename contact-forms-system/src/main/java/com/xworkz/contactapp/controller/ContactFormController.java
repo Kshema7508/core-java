@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -103,4 +104,13 @@ public class ContactFormController {
 		model.addAttribute("dtos",this.dtos);
 		return  "/Display.jsp";
 	}
-}
+	
+	@GetMapping("/search")
+	public String onSearch(Model model, String personName) {
+		System.out.println("Running onSearch with param"+personName);
+		List<ContactFormDTO> list=service.findByName(personName);
+		model.addAttribute("list",list);
+		return "/Search.jsp";
+		
+	}
+} 

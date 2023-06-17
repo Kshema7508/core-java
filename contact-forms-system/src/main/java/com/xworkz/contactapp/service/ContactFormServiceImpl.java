@@ -8,7 +8,10 @@ import com.xworkz.contactapp.dto.ContactFormDTO;
 import com.xworkz.contactapp.entity.ContactFormEntity;
 import com.xworkz.contactapp.repository.ContactFormRepository;
 
+import java.util.List;
 import java.util.Properties;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -35,8 +38,8 @@ public class ContactFormServiceImpl implements ContactFormService{
 		
 		String portNumber="587";
 		String hostName="smtp.office365.com";
-		final String fromEmail="vijaykumarvini59@outlook.com";
-		final String password="Vij@y123";
+		final String fromEmail="kshemapoojary12@outlook.com";
+		final String password="Kshema@26";
 		String to=email;
 		
 		Properties prop=new Properties();
@@ -84,6 +87,19 @@ public class ContactFormServiceImpl implements ContactFormService{
 		repo.savePerson(contactFormEntity);
 		
 		return true;
+	}
+
+	@Override
+	public List<ContactFormDTO> findByName(String personName) {
+		System.out.println("Running findByName");
+		List<ContactFormEntity> entities=this.repo.findByName(personName);
+		
+		List<ContactFormDTO> dtos=entities.stream().map(ent ->{
+			ContactFormDTO contactFormDTO=new ContactFormDTO();
+			BeanUtils.copyProperties(ent, contactFormDTO);
+			return contactFormDTO;
+		}).collect(Collectors.toList());
+		return dtos;
 	}
 
 }

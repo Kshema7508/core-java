@@ -92,7 +92,9 @@ h1 {
   		
   		<div><a href="ImageDisplay.jsp">View Image</a></div>
   		<div><a href="list">List All</a></div>
+  		<div><a href="Search.jsp">Search</a></div>
 	</nav>
+	
 	
 <div class="container">
 <div class="card card-body" style="width: 35rem;">

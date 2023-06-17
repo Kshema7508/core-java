@@ -23,6 +23,7 @@ body {
   		<div><a href="ImageDisplay.jsp" style="color: lime;">View Image</a></div>
   		<div><a href="BloodGroup.jsp" style="color: lime;">Home</a></div>
   		<div><a href="list" style="color: lime;">List All</a></div>
+  		<div><a href="Search.jsp">Search</a></div>
 	</nav>
 
 <div align="center">
