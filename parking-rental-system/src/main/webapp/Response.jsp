@@ -17,6 +17,7 @@ body{
 	left: 0;
 	bottom: 0;
 	width: 100%;
+	height: 9%;
 	
 	background-color: navy;
 	color: white;
@@ -33,8 +34,7 @@ body{
   			<a href="ParkingInfo.jsp"><button type="button" class="btn btn-light">Home</button></a>
   		</div>
   		<div class="nav navbar-nav navbar-right">
-  			<a href="Singhin.jsp"><button type="button" class="btn btn-light">LogOut</button></a>
-  			<p class="navbar-text" style="color: white; font-size: 20px; font-family:serif;">${dto.adminName}</p>
+  			<p class="navbar-text" style="color: white; font-size: 20px; font-family:serif;">User: ${dto.adminName}</p>
   		</div>
 	</nav>
 	

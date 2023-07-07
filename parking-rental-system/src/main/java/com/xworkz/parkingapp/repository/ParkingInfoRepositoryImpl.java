@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,33 @@ public class ParkingInfoRepositoryImpl implements ParkingInfoRepository{
 		em.close();
 		
 		return result;
+	}
+
+	@Override
+	public ParkingInfoEntity findByAll(String location, String vehicleType, String vehicleClassfi, String terms) {
+		EntityManager em=null;
+		try {
+				System.out.println("Running findByAll in Repo");
+				em=factory.createEntityManager();
+				Query query=em.createNamedQuery("findByAll");
+				query.setParameter("locat", location);
+				query.setParameter("vtype", vehicleType);
+				query.setParameter("vclass", vehicleClassfi);
+				query.setParameter("ter", terms);
+				
+				Object singleResult=query.getSingleResult();
+				if(singleResult != null) {
+					ParkingInfoEntity entity = (ParkingInfoEntity) singleResult;
+					return entity;
+				}
+		}
+		catch (PersistenceException e) {
+			e.printStackTrace();
+		}
+		finally {
+			em.close();
+		}
+		return null;
 	}
 
 }

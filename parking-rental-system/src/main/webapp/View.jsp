@@ -20,6 +20,7 @@ body{
 	left: 0;
 	bottom: 0;
 	width: 100%;
+	height: 9%;
 	
 	background-color: navy;
 	color: white;
@@ -44,8 +45,7 @@ h3 {
   			<a href="ParkingInfo.jsp"><button type="button" class="btn btn-light">Home</button></a>
   		</div>
   		<div class="nav navbar-nav navbar-right">
-  			<a href="Singhin.jsp"><button type="button" class="btn btn-light">LogOut</button></a>
-  			<p class="navbar-text" style="color: white; font-size: 20px; font-family:serif;">${dto.adminName}</p>
+  			<p class="navbar-text" style="color: white; font-size: 20px; font-family:serif;">User: ${dto.adminName}</p>
   		</div>
 	</nav>
 	
@@ -54,8 +54,8 @@ h3 {
 <div class="views">
 	<form action="search" method="get">
 		<div class="form-group">
-			Location: <select name="location" class="form-control">
-				<option>---Select---</option>
+			<select name="location" class="form-control">
+				<option>Select Location</option>
 				<option>Rajajinagar</option>
 				<option>Vijaynagar</option>
 				<option>Jayanagar</option>

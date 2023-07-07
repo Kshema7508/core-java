@@ -10,4 +10,6 @@ public interface ParkingInfoRepository {
 
 	List<ParkingInfoEntity> findByLocation(String location);
 
+	ParkingInfoEntity findByAll(String location, String vehicleType, String vehicleClassfi, String terms);
+
 }

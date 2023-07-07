@@ -17,6 +17,7 @@ body{
 	left: 0;
 	bottom: 0;
 	width: 100%;
+	height: 9%;
 	
 	background-color: navy;
 	color: white;
@@ -91,7 +92,6 @@ h1 {
 <footer>
 	<div class="foot">
 		<small>@ 2023 Copyright &copy; xworkz.com</small>
-		<p>last_login_time: </p>
 	</div>
 </footer>
 

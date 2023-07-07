@@ -20,7 +20,8 @@ body{
 	position: fixed;
 	left: 0;
 	bottom: 0;
-	width: 100%;
+	width: 100%; 
+	height: 9%;
 	
 	background-color: navy;
 	color: white;
@@ -109,8 +110,7 @@ h3 {
   			<a href="ParkingInfo.jsp"><button type="button" class="btn btn-light">Home</button></a>
   		</div>
   		<div class="nav navbar-nav navbar-right">
-  			<a href="Singhin.jsp"><button type="button" class="btn btn-light">LogOut</button></a>
-  			<p class="navbar-text" style="color: white; font-size: 20px; font-family:serif;">${dto.adminName}</p>
+  			<p class="navbar-text" style="color: white; font-size: 20px; font-family:serif;">User: ${dto.adminName}</p>
   		</div>
 	</nav>
 	
@@ -133,8 +133,8 @@ h3 {
 	<form action="save" method="post" name="registeration">
 	
 		<div class="form-group">
-			Location: <select name="location" class="form-control"  required>
-				<option value="">---Select---</option>
+			<select name="location" class="form-control"  required>
+				<option value="">Select Location</option>
 				<option>Rajajinagar</option>
 				<option>Vijaynagar</option>
 				<option>Jayanagar</option>
@@ -144,8 +144,8 @@ h3 {
 		</div>
 		
 		<div class="form-group">
-			Vehicle Type: <select name="vehicleType" class="form-control" required>
-				<option value="">---Select---</option>
+			<select name="vehicleType" class="form-control" required>
+				<option value="">Select Vehicle Type</option>
 				<option>2 Wheeler</option>
 				<option>4 Wheeler</option>
 				<option>Electric</option>
@@ -153,8 +153,8 @@ h3 {
 		</div>
 		
 		<div class="form-group">
-			Vehicle Classification: <select name="vehicleClassfi" class="form-control" required>
-				<option value="">---Select---</option>
+			<select name="vehicleClassfi" class="form-control" required>
+				<option value="">Select Vehicle Classification</option>
 				<option>Bike</option>
 				<option>Kia</option>
 				<option>Bmw</option>
@@ -171,8 +171,8 @@ h3 {
 		</div>
 		
 		<div class="form-group">
-			Terms: <select name="terms" class="form-control" required>
-				<option value="">---Select---</option>
+			<select name="terms" class="form-control" required>
+				<option value="">Select Terms</option>
 				<option>1 Day</option>
 				<option>7 Days</option>
 				<option>15 Days</option>
@@ -186,15 +186,14 @@ h3 {
 		</div>
 		
 		<div class="form-group">
-			Price: <input type="text" name="price" class="form-control" required>
+			<input type="text" name="price" class="form-control" placeholder="Enter Price" required>
 		</div>
 		
 		<div class="form-group">
-			Discount: <input type="text" name="discount" class="form-control" required>
+			<input type="text" name="discount" class="form-control" placeholder="Enter Discount" required>
 		</div>
 		
 		<button type="submit" class="btn btn-primary">Save</button>
-		
 	</form>
 </div>
 </div>

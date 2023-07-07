@@ -2,8 +2,6 @@ package com.xworkz.parkingapp.controller;
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Set;
-import java.util.TreeSet;
 
 import javax.validation.Valid;
 
@@ -34,7 +32,7 @@ public class ParkingInfoController {
 	public String onSave(@Valid ParkingInfoDTO dto,BindingResult bindingResult,Model model) throws IOException{
 		System.out.println("Running onsave");
 		
-		model.addAttribute("dtos",dto);
+		//model.addAttribute("dtos",dto);
 		if(bindingResult.hasErrors()) {
 			System.out.println("Data is invalid");
 			model.addAttribute("errors",bindingResult.getAllErrors());

@@ -65,6 +65,8 @@ public class ParkingServiceImpl implements ParkingService {
 			message.addRecipient(Message.RecipientType.TO,new InternetAddress(to));
 			Transport.send(message);
 			
+		
+			
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}

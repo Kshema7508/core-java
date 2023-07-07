@@ -16,6 +16,7 @@ body{
 	left: 0;
 	bottom: 0;
 	width: 100%;
+	height: 9%;
 	
 	background-color: navy;
 	color: white;
@@ -30,7 +31,7 @@ body{
   			<img height="80px" 
   				src="https://media.istockphoto.com/id/1342748790/vector/car-parking-icon-parking-space-parking-lot-car-park.jpg?s=612x612&w=0&k=20&c=hNw7RyLko256Z_yvk1IeRnxttUsgtECmCK5zIQvOlQg=">
   			<a href="Singhin.jsp"><button type="button" class="btn btn-light">Admin</button></a>
-  			<button type="button" class="btn btn-light">User</button>
+  			<a href="Userlogin.jsp"><button type="button" class="btn btn-light">User</button></a>
   		</div>
 	</nav>
 
@@ -38,7 +39,7 @@ body{
 <footer>
 	<div class="foot">
 		<small>@ 2023 Copyright &copy; xworkz.com</small>
-		<p>last_login_time: </p>
+		
 	</div>
 </footer>
 

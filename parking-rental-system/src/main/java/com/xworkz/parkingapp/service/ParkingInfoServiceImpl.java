@@ -46,4 +46,13 @@ public class ParkingInfoServiceImpl implements ParkingInfoService{
 		return dtos;
 	}
 
+	@Override
+	public ParkingInfoEntity findByAll(String location, String vehicleType, String vehicleClassfi, String terms) {
+		System.out.println("Running findByAll method service");
+		
+		ParkingInfoEntity entity= infoRepository.findByAll(location,vehicleType,vehicleClassfi,terms);
+		System.out.println("entity : "+entity);
+		return entity;
+	}
+
 }
