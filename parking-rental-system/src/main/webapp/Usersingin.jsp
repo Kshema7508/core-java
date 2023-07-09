@@ -7,6 +7,7 @@
 <title>UserSingin</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
 	rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
 <style>
 body{
 	background-color: #eee;
@@ -23,7 +24,12 @@ body{
 	text-align: center;
 }
 .container{
-	max-width: 700px;
+	max-width: 500px;
+	margin: auto; 
+	top: 0;
+}
+h3 {
+	font-style: oblique;
 }
 </style>
 </head>
@@ -81,6 +87,8 @@ body{
   		</div>
 	</nav>
 	
+	<h3 align="center">User SingIn</h3>
+	
 <div class="container">
 <div class="card border-0 shadow">
 <div class="card-body">
@@ -103,15 +111,15 @@ body{
     		<div style="display: flex; width:80%;
                 		justify-content:center; padding-top: 0%;">
         		Time Left ::
-    		</div>
-    		<div style="display: flex; width:80%;
+    	</div>
+    	<div style="display: flex; width:80%;
                 		justify-content:center; padding-top: 0%;">
-        	<input id="minutes" type="text" style="width: 2%; border: none; font-size: 16px;
+        	<input id="minutes" type="text" style="width: 8%; border: none; font-size: 16px;
                       font-weight: bold; color: black;">
         	<font size="5">
             	:
        	 	</font>
-        	<input id="seconds" type="text" style="width: 2%; border: none; font-size: 16px;
+        	<input id="seconds" type="text" style="width: 8%; border: none; font-size: 16px;
                       font-weight: bold; color: black;">
     	</div>
     		

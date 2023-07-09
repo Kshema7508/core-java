@@ -39,7 +39,6 @@ public class UserRepositoryImpl implements UserRepository{
 			em.close();
 		}
 		
-		
 	}
 	
 	@Override
@@ -49,6 +48,23 @@ public class UserRepositoryImpl implements UserRepository{
 		EntityManager em=factory.createEntityManager();
 		em.getTransaction().begin();
 		em.persist(entity);
+		em.getTransaction().commit();
+		em.close();
+		
+		return true;
+	}
+
+	@Override
+	public boolean userSignInUpdate(String oneTimePassword, String email) {
+		System.out.println("Inside userSignInUpdate");
+		
+		EntityManager em=factory.createEntityManager();
+		em.getTransaction().begin();
+		Query query=em.createNamedQuery("updateOTP");
+		query.setParameter("mail", email);
+		query.setParameter("oneTime", oneTimePassword);
+		
+		int in=query.executeUpdate();
 		em.getTransaction().commit();
 		em.close();
 		

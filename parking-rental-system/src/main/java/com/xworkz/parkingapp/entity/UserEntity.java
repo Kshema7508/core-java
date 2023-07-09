@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
@@ -14,7 +15,9 @@ import lombok.Data;
 @Data
 @Entity 
 @Table(name="user_details")
-@NamedQuery(name = "findByUserEmail", query = "select ent from UserEntity as ent where ent.email=:mail")
+@NamedQueries({
+@NamedQuery(name = "findByUserEmail", query = "select ent from UserEntity as ent where ent.email=:mail"),
+@NamedQuery(name = "updateOTP", query = "update UserEntity entity set entity.oneTimePassword=:oneTime where entity.email=:mail")})
 public class UserEntity {
 
 	@Id

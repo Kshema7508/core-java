@@ -8,4 +8,6 @@ public interface UserRepository {
 
 	UserEntity findByUserEmail(String email);
 
+	boolean userSignInUpdate(String oneTimePassword, String email);
+
 }

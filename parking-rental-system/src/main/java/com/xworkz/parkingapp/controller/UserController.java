@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.xworkz.parkingapp.dto.UserDTO;
 import com.xworkz.parkingapp.dto.UserParkingDTO;
+import com.xworkz.parkingapp.entity.UserEntity;
 import com.xworkz.parkingapp.service.UserParkingService;
 import com.xworkz.parkingapp.service.UserService;
 
@@ -50,10 +51,11 @@ public class UserController {
 	}
 	
 	@PostMapping("/sendotp")
-	public String sendOTP(@RequestParam("email") String email, Model model) {
+	public String sendOTP(@RequestParam("email") String email, Model model, UserEntity entity) {
 		System.out.println("Running sendOTP method");
 		
-		userService.otpSendMail(email);
+		//userService.otpSendMail(email,entity);
+		userService.userSignIn(email, entity);
 		model.addAttribute("successMsg","OTP send to email successfully");
 		return "/Usersingin.jsp";
 	}
