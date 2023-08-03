@@ -36,6 +36,7 @@ public class UserEntity {
 //	private LocalTime otpExpiryTime;
 	
 	
+	
 //	public boolean isOTPRequired() {
 //		if(this.getOneTimePassword() == null) {
 //			return false;

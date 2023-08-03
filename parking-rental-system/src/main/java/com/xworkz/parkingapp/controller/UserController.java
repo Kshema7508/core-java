@@ -1,9 +1,17 @@
 package com.xworkz.parkingapp.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.time.LocalTime;
+import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
@@ -11,10 +19,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.xworkz.parkingapp.constants.ApplicationConstant;
 import com.xworkz.parkingapp.dto.UserDTO;
 import com.xworkz.parkingapp.dto.UserParkingDTO;
 import com.xworkz.parkingapp.entity.UserEntity;
@@ -27,6 +38,7 @@ public class UserController {
 
 	@Autowired
 	private UserService userService;
+	
 	
 	
 	public UserController() {
@@ -98,64 +110,83 @@ public class UserController {
 			
 			if(isOtpValid !=null) {
 				HttpSession session=req.getSession(true);
-				session.setAttribute("userDto", eneen);
+				session.setAttribute("userDto", eneen); 
 				
 				return "UserLoginSuccess.jsp";
 			}
 			else {
 				model.addAttribute("error","Invalid OTP");
-			}
-			
-			 
+			} 
 		}
-		
-		return "Usersingin.jsp";
-			
+		return "Usersingin.jsp";		
 	}
-
-//		userService.userSignIn(email, entity);
-//		model.addAttribute("successMsg","OTP send to email successfully");
-		//return "/Usersingin.jsp";
-		
-		
-//		
-//		if(entity !=null) {
-//			userService.userSignIn(email, entity);
-//			
-//			return "/Usersingin.jsp";
-//		}
-//			if(dtos !=null) {
-//			System.out.println(dtos);
-//			
-//			return "/UserLoginSuccess.jsp"; 
-//			
-//		}
-//		System.out.println("Incorrect credential");
-//		model.addAttribute("error", "Invalid credential, please re-enter correct data");
-//		return "/Usersingin.jsp";
-//		
-//		
-////		System.out.println("Incorrect credential");
-////		model.addAttribute("error", "Invalid credential, please re-enter correct data");
-//		//return "/Usersingin.jsp";
-//
-//	}
 	
-//	@PostMapping("/userLogin")
-//	public String userLogin(@RequestParam("email") String email, @RequestParam("oneTimePassword") String oneTimePassword, Model model, UserDTO dto, HttpServletRequest req) {
-//		System.out.println("Inside userLogin method");
-//		
-//		UserDTO dtos=userService.userLogin(email,oneTimePassword);
-//		if(dtos !=null) {
-//			System.out.println(dtos);
-//			HttpSession session=req.getSession(true);
-//			session.setAttribute("dto", dtos);
-//			return "/UserLoginSuccess.jsp"; 
-//		}
-//
-//		System.out.println("Incorrect credential");
-//		model.addAttribute("error", "Invalid credential, please re-enter correct data");
-//		return "/Usersingin.jsp";
-//	}
+	@PostMapping("/onsave")
+	public String onSave(@Valid UserParkingDTO dto, BindingResult bindingResult, Model model, MultipartFile file, HttpServletRequest req) throws IOException {
+		System.out.println("Running onSave "+dto);
+		
+		model.addAttribute("dtos",dto);
+		
+		if(bindingResult.hasErrors()) {
+			System.out.println("Data is invalid");
+			model.addAttribute("errors",bindingResult.getAllErrors());
+			model.addAttribute("dto",dto);
+			
+			return "/UserParkinginfo.jsp";
+		}
+		else {
+			System.out.println("File received: "+file.getName());
+			System.out.println("File Size: "+file.getSize());
+			System.out.println("File Type: "+file.getContentType());
+			System.out.println("File bytes: "+file.getBytes());
+			
+			dto.setFileName(System.currentTimeMillis()+ "-" +file.getOriginalFilename());
+			//dto.setFileName(file.getOriginalFilename());
+			dto.setContentType(file.getContentType());
+			dto.setFileSize(file.getSize());
+			
+			File physiicalFile = new File(ApplicationConstant.FILE_LOCATION + dto.getFileName());
+			
+			try (OutputStream os = new FileOutputStream(physiicalFile)) {
+				os.write(file.getBytes());
+			}
+			HttpSession session=req.getSession();
+			UserEntity entity = (UserEntity) session.getAttribute("userDto");			
+			System.out.println("Data is valid");
+			userService.onSave(dto , entity.getEmail());
+			
+		
+			
+			model.addAttribute("successMsg", "UserParking Information "+dto.getLocation()+" saved successfully");
+		}
+		return "/Responseuser.jsp";
+	}
+	
+	@GetMapping("/fetchdata")
+	public String fetchAllData(UserDTO dto, UserParkingDTO dtos,  HttpServletResponse response, Model model, HttpServletRequest req) throws IOException{
+		System.out.println("Running fetchAllData");
+		
+		HttpSession session=req.getSession();
+		UserEntity sessionDto = (UserEntity) session.getAttribute("userDto");	
+		File file=new File(ApplicationConstant.FILE_LOCATION + dtos.getFileName());
+		response.setContentType(dtos.getContentType());
+		OutputStream outputStream=response.getOutputStream();
+		FileInputStream in=new FileInputStream(file);
+		byte[] buffer=new byte[4096];
+		int length;
+		
+		while((length = in.read(buffer)) > 0) {
+			outputStream.write(buffer,0,length);
+		}
+		in.close();
+		outputStream.flush();
+		
+		UserDTO list= userService.getAllUserInfo(sessionDto.getEmail());
+		List<UserParkingDTO> list1=userService.getAllParkInfo(sessionDto.getEmail());
+		model.addAttribute("userDto",list);
+		model.addAttribute("userInfoDto",list1);
+		System.out.println("viewing parking info "+list1);
+		return "/UserView.jsp";
+	}
 	
 }

@@ -14,5 +14,8 @@ public class UserParkingDTO {
 	private String price;
 	private String discount;
 	private int totalAmount;
+	private String fileName;
+	private String contentType;
+	private long fileSize;
 	
 }

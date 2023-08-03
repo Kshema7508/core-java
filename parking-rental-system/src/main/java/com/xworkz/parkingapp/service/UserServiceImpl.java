@@ -3,8 +3,10 @@ package com.xworkz.parkingapp.service;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Properties;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -19,6 +21,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.xworkz.parkingapp.dto.ParkingInfoDTO;
 import com.xworkz.parkingapp.dto.UserDTO;
 import com.xworkz.parkingapp.dto.UserParkingDTO;
 import com.xworkz.parkingapp.entity.UserEntity;
@@ -208,6 +211,37 @@ public class UserServiceImpl implements UserService{
 		return userRepository.findByUserEmail(email);
 		 
 	}
-	
-	
+
+	@Override
+	public void onSave(UserParkingDTO dto, String email) {
+		UserParkingEntity entity1=new UserParkingEntity();
+		BeanUtils.copyProperties(dto, entity1);
+		UserEntity userEntity=userRepository.findByUserEmail(email);
+		entity1.setUserId(userEntity.getUserId());
+		parkingRepository.saveInformation(entity1);
+	}
+
+	@Override
+	public UserDTO getAllUserInfo(String email) {
+		System.out.println("Running getAllUserInfo");
+		
+		UserEntity entity=this.userRepository.findByUserEmail(email);
+		UserDTO dto=new UserDTO();
+		BeanUtils.copyProperties(entity, dto);
+		return dto;
+	}
+
+	@Override
+	public List<UserParkingDTO> getAllParkInfo(String email) {
+		System.out.println("Running getAllParkInfo");
+		
+		UserEntity entity=this.userRepository.findByUserEmail(email);
+		List<UserParkingEntity> entities=this.parkingRepository.findByUserId(entity.getUserId());
+		List<UserParkingDTO> dtos=entities.stream().map(ent ->{
+			UserParkingDTO userParkingDTO=new UserParkingDTO();
+			BeanUtils.copyProperties(entities, userParkingDTO);
+			return userParkingDTO;
+		}).collect(Collectors.toList());
+		return dtos;	
+	}
 }

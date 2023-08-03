@@ -42,7 +42,7 @@ body{
 
 		<div class="park">
 			<a href="UserParkinginfo.jsp"><button type="button" class="btn btn-dark">Parking Info</button></a>
-			<a href="View.jsp"><button type="button" class="btn btn-dark">View</button></a>
+			<a href="UserView.jsp"><button type="button" class="btn btn-dark">View</button></a>
 		</div>
 
 <footer>

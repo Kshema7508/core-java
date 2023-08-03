@@ -1,5 +1,9 @@
 package com.xworkz.parkingapp.service;
 
+import java.util.List;
+
+import javax.validation.Valid;
+
 import com.xworkz.parkingapp.dto.UserDTO;
 import com.xworkz.parkingapp.dto.UserParkingDTO;
 import com.xworkz.parkingapp.entity.UserEntity;
@@ -17,4 +21,12 @@ public interface UserService {
 	UserDTO userLogin(String email, String oneTimePassword);
 
 	UserEntity findByUserEmail(String email);
+
+	void onSave(UserParkingDTO dto, String email);
+
+	UserDTO getAllUserInfo(String email);
+
+	List<UserParkingDTO> getAllParkInfo(String email);
+
+	
 }

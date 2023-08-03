@@ -107,7 +107,7 @@ h3 {
 	</c:forEach>  
 	
 	
-	<form action="userSave" method="post">
+	<form action="onsave" method="post" enctype="multipart/form-data">
 	
 		<div class="form-group">
 			<select name="location" class="form-control" id="location" required>
@@ -171,6 +171,10 @@ h3 {
 		
 		<div class="form-group">
 			Total Amount: <input type="number" name="totalAmount" class="form-control" id="totalAmount" readonly="readonly">
+		</div>
+		
+		<div class="form-group">
+			Upload Vehicle Image <input type="file" name="file" class="form-control" required="required">
 		</div>
 		
 		<input type="checkbox" required>I Agree
