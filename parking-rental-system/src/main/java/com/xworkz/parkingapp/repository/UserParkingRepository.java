@@ -10,4 +10,8 @@ public interface UserParkingRepository {
 
 	List<UserParkingEntity> findByUserId(int userId);
 
+	UserParkingEntity updateByParkId(int parkingId);
+
+	UserParkingEntity updateUserInfo(UserParkingEntity entity);
+
 }

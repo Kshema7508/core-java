@@ -20,15 +20,19 @@ import org.springframework.stereotype.Component;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.view.RedirectView;
 
 import com.xworkz.parkingapp.constants.ApplicationConstant;
 import com.xworkz.parkingapp.dto.UserDTO;
 import com.xworkz.parkingapp.dto.UserParkingDTO;
 import com.xworkz.parkingapp.entity.UserEntity;
+import com.xworkz.parkingapp.entity.UserParkingEntity;
 import com.xworkz.parkingapp.service.UserParkingService;
 import com.xworkz.parkingapp.service.UserService;
 
@@ -162,14 +166,26 @@ public class UserController {
 		return "/Responseuser.jsp";
 	}
 	
-	@GetMapping("/fetchdata")
-	public String fetchAllData(UserDTO dto, UserParkingDTO dtos,  HttpServletResponse response, Model model, HttpServletRequest req) throws IOException{
+	@GetMapping("/fetch")
+	public String fetchAllData(UserDTO dto, UserParkingDTO dtos, HttpServletRequest req, HttpServletResponse response, Model model, String fileName, String contentType) throws IOException{
 		System.out.println("Running fetchAllData");
 		
 		HttpSession session=req.getSession();
 		UserEntity sessionDto = (UserEntity) session.getAttribute("userDto");	
-		File file=new File(ApplicationConstant.FILE_LOCATION + dtos.getFileName());
-		response.setContentType(dtos.getContentType());
+		
+		UserDTO list= userService.getAllUserInfo(sessionDto.getEmail());
+		List<UserParkingDTO> list1=userService.getAllParkInfo(sessionDto.getEmail());
+	
+		model.addAttribute("userInfo",list1);
+		System.out.println("viewing parking info "+list1);
+		return "/UserView.jsp";
+	}
+	
+	@GetMapping("/fileDownload")
+	public void imageDownload(String fileName, String contentType, HttpServletResponse response) throws IOException{
+		System.out.println("Running imageDownload");
+		File file=new File(ApplicationConstant.FILE_LOCATION + fileName);
+		response.setContentType(contentType);
 		OutputStream outputStream=response.getOutputStream();
 		FileInputStream in=new FileInputStream(file);
 		byte[] buffer=new byte[4096];
@@ -180,13 +196,31 @@ public class UserController {
 		}
 		in.close();
 		outputStream.flush();
-		
-		UserDTO list= userService.getAllUserInfo(sessionDto.getEmail());
-		List<UserParkingDTO> list1=userService.getAllParkInfo(sessionDto.getEmail());
-		model.addAttribute("userDto",list);
-		model.addAttribute("userInfoDto",list1);
-		System.out.println("viewing parking info "+list1);
-		return "/UserView.jsp";
 	}
 	
+	@GetMapping(value = "/update/{parkingId}")
+	public String updateUser(@PathVariable("parkingId") int parkingId, HttpServletRequest req) {
+		System.out.println("Inside updateUser method");
+		
+//		HttpSession session=req.getSession();
+//		UserEntity sessionDto = (UserEntity) session.getAttribute("userDto");
+		
+		UserParkingDTO dto=userService.updateAllParkInfo(parkingId);
+		
+		req.setAttribute("parkingId", dto);
+		RedirectView view=new RedirectView();
+		view.setUrl(req.getContextPath()+"/");
+		
+		return "/UpdateUser.jsp";
+	}
+	
+	@PostMapping(value = "/updateuserpark")
+	public String update(@ModelAttribute UserParkingDTO dto, HttpServletRequest req) {
+		System.out.println("Inside update method");
+		
+		userService.updateUserByIdSer(dto);
+		req.setAttribute("parkingId", dto);
+		
+		return "/UserView.jsp";
+	}
 }

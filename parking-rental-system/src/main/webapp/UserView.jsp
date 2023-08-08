@@ -78,9 +78,10 @@ h3 {
 			<th>Discount</th>
 			<th>Total Amount</th>
 			<th>Image</th>
+			<th>Action</th>
 		</tr>
 		
-	<c:forEach items="${userInfoDto}" var="dto">
+	<c:forEach items="${userInfo}" var="dto">
 		<tr>
 			<td>${dto.location}</td>
 			<td>${dto.vehicleType}</td>
@@ -89,7 +90,8 @@ h3 {
 			<td>${dto.price}</td>
 			<td>${dto.discount}</td>
 			<td>${dto.totalAmount}</td>
-			<td>${dto.fileName}</td>
+			<td><a target="_blank" href="fileDownload?fileName=${dto.fileName}&contenyType=${dto.contentType}">${dto.fileName}</a></td>
+			<td><a href="update/${dto.parkingId}">Update</a></td>
 		</tr>
 	</c:forEach>
 </table>		

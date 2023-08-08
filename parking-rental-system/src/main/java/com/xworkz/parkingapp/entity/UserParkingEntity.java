@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedEntityGraph;
+import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
@@ -13,7 +14,12 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name="userparking_details")
-@NamedQuery(name="fetch", query="select entity from UserParkingEntity as entity where entity.userId=:id")
+@NamedQueries({
+@NamedQuery(name="fetch", query="select entity from UserParkingEntity as entity where entity.userId=:id"),
+@NamedQuery(name="fetchpark", query="select entity from UserParkingEntity as entity where entity.parkingId=:pid"),
+@NamedQuery(name = "updateuserinfo", query = "update UserParkingEntity entity set entity.location=:loc, "
+		+ "entity.vehicleType=:vtype,entity.vehicleClassfi=:vclass, entity.terms=:ter, entity.price=:pr, entity.discount=:dis, "
+		+ "entity.totalAmount=:tamount, entity.fileName=:fName where entity.userId=:id")})
 public class UserParkingEntity {
 
 	@Id

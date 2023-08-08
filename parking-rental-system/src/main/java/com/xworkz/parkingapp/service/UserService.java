@@ -28,5 +28,7 @@ public interface UserService {
 
 	List<UserParkingDTO> getAllParkInfo(String email);
 
-	
+	UserParkingDTO updateAllParkInfo(int parkingId);
+
+	void updateUserByIdSer(UserParkingDTO dto);
 }

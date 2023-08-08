@@ -1,4 +1,4 @@
-package com.xworkz.parkingapp.service;
+     package com.xworkz.parkingapp.service;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -21,7 +21,6 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.xworkz.parkingapp.dto.ParkingInfoDTO;
 import com.xworkz.parkingapp.dto.UserDTO;
 import com.xworkz.parkingapp.dto.UserParkingDTO;
 import com.xworkz.parkingapp.entity.UserEntity;
@@ -239,9 +238,35 @@ public class UserServiceImpl implements UserService{
 		List<UserParkingEntity> entities=this.parkingRepository.findByUserId(entity.getUserId());
 		List<UserParkingDTO> dtos=entities.stream().map(ent ->{
 			UserParkingDTO userParkingDTO=new UserParkingDTO();
-			BeanUtils.copyProperties(entities, userParkingDTO);
+			BeanUtils.copyProperties(ent, userParkingDTO);
 			return userParkingDTO;
 		}).collect(Collectors.toList());
 		return dtos;	
 	}
+
+	@Override
+	public UserParkingDTO updateAllParkInfo(int parkingId) {
+		System.out.println("Running updateAllParkInfo");
+		
+		//UserEntity entity=this.userRepository.findByUserEmail(email);
+		UserParkingEntity entity=new UserParkingEntity(); 
+		parkingRepository.updateByParkId(entity.getParkingId());
+		UserParkingDTO dtos=new UserParkingDTO();
+		BeanUtils.copyProperties(dtos, parkingId);
+		return dtos;	
+	}
+
+	@Override
+	public void updateUserByIdSer(UserParkingDTO dto) {
+		System.out.println("Running updateUserByIdSer");
+		
+		UserParkingEntity entity=new UserParkingEntity();
+		UserParkingEntity entities=parkingRepository.updateUserInfo(entity);
+		UserParkingDTO dtos=new UserParkingDTO();
+		BeanUtils.copyProperties(dtos, dto);
+		
+		System.out.println(dto);
+	}
+
+	
 }
