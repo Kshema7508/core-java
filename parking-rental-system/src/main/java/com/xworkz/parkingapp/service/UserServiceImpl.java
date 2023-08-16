@@ -249,23 +249,25 @@ public class UserServiceImpl implements UserService{
 		System.out.println("Running updateAllParkInfo");
 		
 		//UserEntity entity=this.userRepository.findByUserEmail(email);
-		UserParkingEntity entity=new UserParkingEntity(); 
-		parkingRepository.updateByParkId(entity.getParkingId());
-		UserParkingDTO dtos=new UserParkingDTO();
-		BeanUtils.copyProperties(dtos, parkingId);
-		return dtos;	
+		UserParkingEntity entity=parkingRepository.updateByParkId(parkingId);
+		if(entity!=null) {
+			UserParkingDTO dtos=new UserParkingDTO();
+			BeanUtils.copyProperties(entity, dtos);
+			return dtos;	
+		}
+		return null;
 	}
 
 	@Override
 	public void updateUserByIdSer(UserParkingDTO dto) {
 		System.out.println("Running updateUserByIdSer");
 		
-		UserParkingEntity entity=new UserParkingEntity();
-		UserParkingEntity entities=parkingRepository.updateUserInfo(entity);
-		UserParkingDTO dtos=new UserParkingDTO();
-		BeanUtils.copyProperties(dtos, dto);
-		
 		System.out.println(dto);
+		UserParkingEntity entity=new UserParkingEntity();
+		BeanUtils.copyProperties(dto, entity);
+		parkingRepository.updateUserInfo(entity);
+		
+		System.out.println(entity);
 	}
 
 	

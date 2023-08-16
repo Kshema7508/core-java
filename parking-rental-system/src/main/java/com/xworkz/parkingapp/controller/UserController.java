@@ -202,12 +202,9 @@ public class UserController {
 	public String updateUser(@PathVariable("parkingId") int parkingId, HttpServletRequest req) {
 		System.out.println("Inside updateUser method");
 		
-//		HttpSession session=req.getSession();
-//		UserEntity sessionDto = (UserEntity) session.getAttribute("userDto");
-		
 		UserParkingDTO dto=userService.updateAllParkInfo(parkingId);
 		
-		req.setAttribute("parkingId", dto);
+		req.setAttribute("parkingid", dto);
 		RedirectView view=new RedirectView();
 		view.setUrl(req.getContextPath()+"/");
 		
@@ -215,12 +212,29 @@ public class UserController {
 	}
 	
 	@PostMapping(value = "/updateuserpark")
-	public String update(@ModelAttribute UserParkingDTO dto, HttpServletRequest req) {
+	public String update(@ModelAttribute UserParkingDTO dto, Model model, MultipartFile file, HttpServletRequest req) throws IOException {
 		System.out.println("Inside update method");
 		
-		userService.updateUserByIdSer(dto);
-		req.setAttribute("parkingId", dto);
+		System.out.println("File received: "+file.getName());
+		System.out.println("File Size: "+file.getSize());
+		System.out.println("File Type: "+file.getContentType());
+		System.out.println("File bytes: "+file.getBytes());
 		
+		dto.setFileName(System.currentTimeMillis()+ "-" +file.getOriginalFilename());
+		//dto.setFileName(file.getOriginalFilename());
+		dto.setContentType(file.getContentType());
+		dto.setFileSize(file.getSize());
+		
+		File physiicalFile = new File(ApplicationConstant.FILE_LOCATION + dto.getFileName());
+		
+		try (OutputStream os = new FileOutputStream(physiicalFile)) {
+			os.write(file.getBytes());
+		}
+		System.out.println(dto);
+		userService.updateUserByIdSer(dto);
+		
+		req.setAttribute("parkingid", dto);
+	
 		return "/UserView.jsp";
 	}
 }

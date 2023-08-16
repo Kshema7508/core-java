@@ -57,15 +57,11 @@ public class UserParkingRepositoryImpl implements UserParkingRepository{
 		em.getTransaction().begin();
 		Query query=em.createNamedQuery("fetchpark");
 		query.setParameter("pid", parkingId);
-		Object object = query.getSingleResult();
-		UserParkingEntity result = (UserParkingEntity) object;
+		UserParkingEntity entities=(UserParkingEntity) query.getSingleResult();
 		em.getTransaction().commit();
-		System.out.println("Result from repo " + result);
-		return result;
-//		UserParkingEntity entities=(UserParkingEntity) query.getSingleResult();
-//		em.getTransaction().commit();
-//		System.out.println(entities);
-//		return entities;	
+		em.close();
+		System.out.println("Result from repo " + entities);
+		return entities;	
 	}
 
 	@Override
@@ -78,18 +74,19 @@ public class UserParkingRepositoryImpl implements UserParkingRepository{
 		Query query=em.createNamedQuery("updateuserinfo");
 		query.setParameter("loc", entity.getLocation());
 		query.setParameter("vtype", entity.getVehicleType()); 
-		query.setParameter("vclass",entity.getVehicleType());
+		query.setParameter("vclass",entity.getVehicleClassfi());
 		query.setParameter("ter", entity.getTerms());
 		query.setParameter("pr", entity.getPrice());
 		query.setParameter("dis", entity.getDiscount());
 		query.setParameter("tamount", entity.getTotalAmount());
 		query.setParameter("fName", entity.getFileName());
-		query.setParameter("id",entity.getParkingId());
+		query.setParameter("pid",entity.getParkingId());
 		
 		int in=query.executeUpdate();
 		
 		em.getTransaction().commit();
 	
+		System.out.println(query);
 		return null;
 	}
 

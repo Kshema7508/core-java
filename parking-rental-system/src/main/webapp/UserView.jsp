@@ -81,17 +81,17 @@ h3 {
 			<th>Action</th>
 		</tr>
 		
-	<c:forEach items="${userInfo}" var="dto">
+	<c:forEach items="${userInfo}" var="parkingid">
 		<tr>
-			<td>${dto.location}</td>
-			<td>${dto.vehicleType}</td>
-			<td>${dto.vehicleClassfi}</td>
-			<td>${dto.terms}</td>
-			<td>${dto.price}</td>
-			<td>${dto.discount}</td>
-			<td>${dto.totalAmount}</td>
-			<td><a target="_blank" href="fileDownload?fileName=${dto.fileName}&contenyType=${dto.contentType}">${dto.fileName}</a></td>
-			<td><a href="update/${dto.parkingId}">Update</a></td>
+			<td>${parkingid.location}</td>
+			<td>${parkingid.vehicleType}</td>
+			<td>${parkingid.vehicleClassfi}</td>
+			<td>${parkingid.terms}</td>
+			<td>${parkingid.price}</td>
+			<td>${parkingid.discount}</td>
+			<td>${parkingid.totalAmount}</td>
+			<td><a target="_blank"href="fileDownload?fileName= ${parkingid.fileName}&contentType=${parkingid.contentType}">${parkingid.fileName}</a></td>
+			<td><a href="update/${parkingid.parkingId}">Update</a></td>
 		</tr>
 	</c:forEach>
 </table>		

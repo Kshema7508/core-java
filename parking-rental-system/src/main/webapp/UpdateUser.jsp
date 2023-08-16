@@ -68,12 +68,12 @@ h3 {
 	<form action="${pageContext.request.contextPath}/updateuserpark" method="post" enctype="multipart/form-data">
 	
 		<div class="form-group">
-			<input type="text" value="${userid.getParkingId()}" name="parkingId"> <br>
+			<input type="text" value="${parkingid.getParkingId()}" name="parkingId" readonly="readonly"> 
 		</div>
 	
 		<div class="form-group">
-			<select name="location" class="form-control" id="location" required>
-				<option value="">Select Location</option>
+			<select name="location" class="form-control" id="location">
+				<option value="">${parkingid.getLocation()}</option>
 				<option>Rajajinagar</option>
 				<option>Vijaynagar</option>
 				<option>Jayanagar</option>
@@ -83,8 +83,8 @@ h3 {
 		</div>
 		
 		<div class="form-group">
-			<select name="vehicleType" class="form-control" id="vehicleType" required>
-				<option value="">Select Vehicle Type</option>
+			<select name="vehicleType" class="form-control" id="vehicleType"  >
+				<option value="">${parkingid.getVehicleType()}</option>
 				<option>2 Wheeler</option>
 				<option>4 Wheeler</option>
 				<option>Electric</option>
@@ -92,8 +92,8 @@ h3 {
 		</div>
 		
 		<div class="form-group">
-			<select name="vehicleClassfi" class="form-control" id="vehicleClassfi" required>
-				<option value="">Select Vehicle Classification</option>
+			<select name="vehicleClassfi" class="form-control" id="vehicleClassfi" >
+				<option value="">${parkingid.getVehicleClassfi()}</option>
 				<option>Bike</option>
 				<option>Kia</option>
 				<option>Bmw</option>
@@ -110,8 +110,8 @@ h3 {
 		</div>
 		
 		<div class="form-group">
-			<select name="terms" class="form-control" id="terms" onchange="findPrice()" required >
-				<option value="">Select Terms</option>
+			<select name="terms" class="form-control" id="terms" onchange="findPrice()" >
+				<option value="">${parkingid.getTerms()}</option>
 				<option>1 Day</option>
 				<option>7 Days</option>
 				<option>15 Days</option>
@@ -124,22 +124,20 @@ h3 {
 		</div>
 		
 		<div class="form-group">
-			Price: <input type="number" name="price"  class="form-control" id="price" readonly="readonly">
+			Price: <input type="number" name="price"  class="form-control" id="price" value="${parkingid.getPrice()}" readonly="readonly">
 		</div>
 		
 		<div class="form-group">
-			Discount: <input type="number" name="discount" class="form-control" id="discount" readonly="readonly">
+			Discount: <input type="number" name="discount" class="form-control" id="discount" value="${parkingid.getDiscount()}" readonly="readonly">
 		</div>
 		
 		<div class="form-group">
-			Total Amount: <input type="number" name="totalAmount" class="form-control" id="totalAmount" readonly="readonly">
+			Total Amount: <input type="number" name="totalAmount" class="form-control" id="totalAmount" value="${parkingid.getTotalAmount()}" readonly="readonly">
 		</div>
 		
-		<div class="form-group">
-			Upload Vehicle Image <input type="file" name="file" class="form-control" required="required">
+		<div >
+			Upload Vehicle Image <input type="file" name="file" class="form-control" value="<a target="_blank" href="fileDownload?fileName=${parkingid.getFileName()}&contentType=${parkingid.getContentType()}">${parkingid.getFileName()}</a>">
 		</div>
-		
-		<input type="checkbox" required>I Agree
 		
 		<button type="submit" class="btn btn-primary">Save</button>
 		
@@ -151,7 +149,7 @@ h3 {
 	<footer>
 		<div class="foot">
 			<small>@ 2023 Copyright &copy; xworkz.com</small>
-			<p>last_login_time: ${dto.loginTime}</p>
+			<p>last_login_time: ${userDto.loginTime}</p>
 		</div>
 	</footer>
 	
