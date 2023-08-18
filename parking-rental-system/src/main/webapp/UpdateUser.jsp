@@ -136,7 +136,7 @@ h3 {
 		</div>
 		
 		<div >
-			Upload Vehicle Image <input type="file" name="file" class="form-control" value="<a target="_blank" href="fileDownload?fileName=${parkingid.getFileName()}&contentType=${parkingid.getContentType()}">${parkingid.getFileName()}</a>">
+			Upload Vehicle Image <input type="file" name="file" id="fileName" class="form-control" value="<a target="_blank" href="fileDownload?fileName=${parkingid.getFileName()}&contentType=${parkingid.getContentType()}">${parkingid.getFileName()}</a>">
 		</div>
 		
 		<button type="submit" class="btn btn-primary">Save</button>
