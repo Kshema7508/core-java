@@ -31,4 +31,6 @@ public interface UserService {
 	UserParkingDTO updateAllParkInfo(int parkingId);
 
 	void updateUserByIdSer(UserParkingDTO dto);
+
+	UserParkingDTO deleteParkingByIdSer(int parkingId);
 }

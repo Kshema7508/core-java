@@ -1,13 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
     
-    	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>User View</title>
+<title>Update Success</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
 	rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	
@@ -43,6 +41,7 @@ h3 {
   			<img height="80px" 
   				src="https://media.istockphoto.com/id/1342748790/vector/car-parking-icon-parking-space-parking-lot-car-park.jpg?s=612x612&w=0&k=20&c=hNw7RyLko256Z_yvk1IeRnxttUsgtECmCK5zIQvOlQg=">
   			<a href="UserLoginSuccess.jsp"><button type="button" class="btn btn-light">Home</button></a>
+  			<a href="UserView.jsp"><button type="button" class="btn btn-light">UserView</button></a>
   		</div>
   		<div class="nav navbar-nav navbar-right">
   			<p class="navbar-text" style="color: white; font-size: 20px; font-family:serif;">User: ${userDto.userName}</p>
@@ -81,7 +80,7 @@ h3 {
 			<th>Action</th>
 		</tr>
 		
-	<c:forEach items="${userInfo}" var="parkingid">
+	
 		<tr>
 			<td>${parkingid.location}</td>
 			<td>${parkingid.vehicleType}</td>
@@ -91,11 +90,9 @@ h3 {
 			<td>${parkingid.discount}</td>
 			<td>${parkingid.totalAmount}</td>
 			<td><a target="_blank" href="fileDownload?fileName= ${parkingid.fileName}&contentType=${parkingid.contentType}">${parkingid.fileName}</a></td>
-			<td><a href="update/${parkingid.parkingId}">Update</a>
-			&nbsp
-			<a href="delete/${parkingid.parkingId}">Delete</a></td>
+			<td><a href="update/${parkingid.parkingId}">Update</a></td>
 		</tr>
-	</c:forEach>
+
 </table>		
 </div>
 

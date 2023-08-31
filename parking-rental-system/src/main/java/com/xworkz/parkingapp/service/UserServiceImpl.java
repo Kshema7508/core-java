@@ -270,5 +270,18 @@ public class UserServiceImpl implements UserService{
 		System.out.println(entity);
 	}
 
+	@Override
+	public UserParkingDTO deleteParkingByIdSer(int parkingId) {
+		System.out.println("Running deleteParkingByIdSer");
+		
+		UserParkingEntity entity=parkingRepository.deleteByParkId(parkingId);
+		if(entity!=null) {
+			UserParkingDTO dtos=new UserParkingDTO();
+			BeanUtils.copyProperties(entity, dtos);
+			return dtos;	
+		}
+		return null;
+	}
+
 	
 }

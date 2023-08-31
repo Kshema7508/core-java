@@ -14,4 +14,6 @@ public interface UserParkingRepository {
 
 	UserParkingEntity updateUserInfo(UserParkingEntity entity);
 
+	UserParkingEntity deleteByParkId(int parkingId);
+
 }

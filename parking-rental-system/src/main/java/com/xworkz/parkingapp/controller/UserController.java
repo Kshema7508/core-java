@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.view.RedirectView;
 
+import com.xworkz.laptopapp.dto.LaptopDTO;
 import com.xworkz.parkingapp.constants.ApplicationConstant;
 import com.xworkz.parkingapp.dto.UserDTO;
 import com.xworkz.parkingapp.dto.UserParkingDTO;
@@ -235,6 +236,18 @@ public class UserController {
 		
 		req.setAttribute("parkingid", dto);
 	
-		return "/UserView.jsp";
+		return "/UpdateSuccess.jsp";
+	}
+	
+	@GetMapping(value = "/delete/{parkingId}")
+	public RedirectView deleteById(@PathVariable("parkingId") int parkingId, HttpServletRequest req) {
+		System.out.println("Inside deleteById method");
+		
+		UserParkingDTO dto=userService.deleteParkingByIdSer(parkingId);
+		req.setAttribute("parkingid", dto);
+	 	RedirectView view=new RedirectView();
+		view.setUrl(req.getContextPath()+"/fetch");
+		
+		return view;
 	}
 }

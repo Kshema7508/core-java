@@ -90,4 +90,22 @@ public class UserParkingRepositoryImpl implements UserParkingRepository{
 		return null;
 	}
 
+	@Override
+	public UserParkingEntity deleteByParkId(int parkingId) {
+		System.out.println("Inside deleteByParkId");
+		
+		EntityManager em=factory.createEntityManager();
+		em.getTransaction().begin();
+		
+		Query query=em.createNamedQuery("deleteParkingById");
+		query.setParameter("pid", parkingId);
+		
+		int i=query.executeUpdate();
+		
+		em.getTransaction().commit();
+		
+		
+		return null;
+	}
+
 }
